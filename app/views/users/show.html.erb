@@ -1,0 +1,66 @@
+<div id="error">
+	<% if @book.errors.any? %>
+		<p><%= @book.errors.count %>error prohibited this obj from being saved: </p>
+		<ul>
+			<% @book.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+			<% end %>
+		</ul>
+	<% end %>
+</div>
+
+<h2>Users info</h2>
+<div class="user">
+	<%= attachment_image_tag @user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg" %>
+	<label>name</label>
+	<p><%= @user.name %></p>
+	<label>introduction</label>
+	<p><%= @user.introduction %></p>
+	<%=link_to "編集", edit_user_path(@user) %>
+</div>
+
+<div class="create">
+	<h2>New Book</h2>
+	<%= form_for(@book) do |f| %>
+
+		<label>Title</label>
+		<%= f.text_field :title %>
+
+		<label>Opinion</label>
+		<%= f.text_area :body %>
+
+		<%= f.submit "Create Book" %>
+
+	<% end %>
+</div>
+
+<div class="show">
+	<h2>Books</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Opinion</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<% @books.each do |book| %>
+					<tb>
+						<%= image_tag('no_image.jpg', class: "img-circle pull-left profile-thumb") %>
+					</tb>
+					<tb>
+						<%= link_to book_path(book.id) do %>
+						<%= book.title %>
+						<% end %>
+					</tb>
+					<tb>
+						<%= link_to book_path(book.id) do %>
+						<%= book.body %>
+						<% end %>
+					</tb>
+				<% end %>
+			</tr>
+		</tbody>
+	</table>
+</div>

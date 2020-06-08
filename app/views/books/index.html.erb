@@ -1,0 +1,25 @@
+
+
+<div class="conteiner">
+	<div class="row">
+	
+
+		<div class="col-lg-8">
+			<h2>Books</h2>
+			  <table>
+			  	<tr class="clearfix">
+			  		<th></th><th>Title</th><th>Opinion</th>
+			  	</tr>
+			  	<% @books.each do |book| %>
+			  	<tr class="clearfix">
+			  		<tb><%= attachment_image_tag book.user, :profile_image, size: "40x40", format: 'jpeg', fallback: "no_image.jpg" %></tb>
+			  		<tb><%= link_to book_path(book.id) do %>
+									<%= book.title %>
+								<% end %></tb>
+			  		<tb><%= book.body %></tb>
+			  	</tr>
+			  	<% end %>
+			  </table>
+	  </div>
+	</div>
+</div>
