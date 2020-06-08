@@ -15,3 +15,15 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+* {
+	maragin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.name {
+	font-color: red;
+}
+
+

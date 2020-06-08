@@ -4,21 +4,23 @@
 			<tr>
 				<th>image</th>
 				<th>name</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
+			<% @users.each do |user| %>
 			<tr>
-				<% @user.each do |user| %>
-					<tb>
-						<%= attachment_image_tag user, :profile_image, :fill, 80, 80, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
-					</tb>
-					<tb>
-						<%= link_to user_path(user.id) do %>
-						<%= user.name %>
-						<% end %>
-					</tb>
-				<% end %>
+				<td>
+					<%= attachment_image_tag user, :profile_image, :fill, 80, 80, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+				</td>
+				<td>
+					<%= user.name %>
+				</td>
+				<td>
+					<%= link_to "show", user_path(@user.id) %>
+				</td>
 			</tr>
+			<% end %>
 		</tbody>
 	</table>
 </div>

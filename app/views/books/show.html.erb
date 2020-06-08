@@ -1,6 +1,6 @@
 <% if flash[:notice] %>
-		<div class="flash"><%= flash[:notice] %></div>
-	<% end %>
+	<div class="flash"><%= flash[:notice] %></div>
+<% end %>
 
 
 <div class="show_box">
@@ -10,7 +10,7 @@
 	<p><%= @book.body %></p>
 	<% if @book.user == current_user %>
 		<%= link_to "Edit", edit_book_path %>
-	<%= button_to "Destroy",  book_path(@book.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+	<%= link_to "Destroy",  book_path(@book.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
 	<% end %>
 
 </div>
