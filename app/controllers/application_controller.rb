@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(reosuce)
+    flash[:notice] = 'Signed out successfully.'
     root_path
   end
 

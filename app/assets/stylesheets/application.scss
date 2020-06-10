@@ -16,14 +16,26 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
-* {
-	maragin: 0;
-	padding: 0;
-	box-sizing: border-box;
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
 }
 
-.name {
-	font-color: red;
+header .navbar-left span {
+	color: white;
+	font-size: 20px;
+    padding-top: 10px;
 }
 
+.body {
+	margin-top: 50px;
+}
 
+.field {
+	margin-bottom: 10px;
+}
+
+.notice {
+	color: green;
+}

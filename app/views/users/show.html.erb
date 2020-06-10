@@ -1,60 +1,73 @@
-<div id="error">
-	<% if @book.errors.any? %>
-		<p><%= @book.errors.count %>error prohibited this obj from being saved: </p>
-		<ul>
-			<% @book.errors.full_messages.each do |message| %>
-				<li><%= message %></li>
-			<% end %>
-		</ul>
+<div class ="container">
+	<div id="error">
+		<% if @book.errors.any? %>
+			<p><%= @book.errors.count %>error prohibited this obj from being saved: </p>
+			<ul>
+				<% @book.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		<% end %>
+	</div>
+
+	<% if flash[:notice] %>
+		<div class="flash notice"><%= flash[:notice] %></div>
 	<% end %>
-</div>
 
-<% if flash[:notice] %>
-	<div class="flash"><%= flash[:notice] %></div>
-<% end %>
 
-<div class="container">
 	<div class="row">
-		<div class="col-lg-4" style="background-color: orange;">
-			<h2>Users info</h2>
+		<div class="col-xs-3">
+			<h2>User info</h2>
 			<div class="user">
 				<%= attachment_image_tag @user, :profile_image, size: "50x50", format: 'jpeg', fallback: "no_image.jpg" %>
-				<div class="name clearfix">
-					<label>name</label>
-					<p><%= @user.name %></p>
+				<table class="table">
+					<tbody>
+						<tr></tr>
+						<tr>
+							<th><label>name</label></th>
+							<th><p><%= @user.name %></p></th>
+						<tr>
+							<th><label>introduction</label></th>
+							<th><p><%= @user.introduction %></p></th>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row">
+					<% if @user.id == current_user.id %>
+						<%= link_to "", edit_user_path(@user), class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_18898" %>
+					<% end %>
 				</div>
-				<div class="introduction clearfix">
-					<label>introduction</label>
-					<p><%= @user.introduction %></p>
-				</div>
-				<% if @user.id == current_user.id %>
-					<%=link_to "編集", edit_user_path(@user) %>
-				<% end %>
 			</div>
 
 			<div class="create">
-				<h2>New Book</h2>
+				<h2>New book</h2>
 				<%= form_for(@book) do |f| %>
-
-					<label>Title</label>
-					<%= f.text_field :title %>
-
-					<label>Opinion</label>
-					<%= f.text_area :body %>
-
-					<%= f.submit "Create Book" %>
-
+					<div class="field row">
+						<label>Title</label>
+						<%= f.text_field :title , class:"col-xs-12 book_title"%>
+					</div>
+					<div class="field row">
+						<label>Opinion</label>
+						<%= f.text_area :body , class:"col-xs-12 book_body"%>
+					</div>
+					<div class="action row">
+					<%= f.submit "Create Book", class:"btn btn-primary col-xs-12" %>
+					</div>
 				<% end %>
 			</div>
 		</div>
 
-		<div class="col-lg-8">
+		<div class="col-xs-9">
 			<h2>Books</h2>
-			<table class="table table-striped">
-			  	<tr>
-			  		<th></th><th>Title</th><th>Opinion</th>
-			  	</tr>
+
+			<table class="table table-hover table-inverse">
+			  	<thaed>
+			  		<tr>
+			  		<th></th><th>Title</th><th>Opinion</th><th></th>
+			  		</tr>
+			  	</thaed>
 			  	<% @books.each do |book| %>
+			  	<tbody>
 			  	<tr>
 			  		<td><%= attachment_image_tag book.user, :profile_image, size: "40x40", format: 'jpeg', fallback: "no_image.jpg" %></td>
 			  		<td><%= link_to book_path(book.id) do %>
@@ -62,6 +75,7 @@
 								<% end %></td>
 			  		<td><%= book.body %></td>
 			  	</tr>
+			  	</tbody>
 			  	<% end %>
 			</table>
 		</div>
