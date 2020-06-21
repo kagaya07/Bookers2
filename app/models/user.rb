@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :books,dependent: :destroy
   attachment :profile_image
+  has_many :post_commenrs, dependent: :destroy
 
   validates :name,
 	  uniqueness: { case_sensitive: :false },

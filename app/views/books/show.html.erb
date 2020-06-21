@@ -64,17 +64,39 @@
 					</td>
 					<td><%= @books.title %></td>
 					<td><%= @books.body %></td>
-					<td>
-						<% if @books.user == current_user %>
+					<% if @books.user == current_user %>
+						<td>
 							<%= link_to "Edit", edit_book_path %>
-					</td>
-					<td>
+						</td>
+						<td>
 						<%= link_to "Destroy",  book_path(@books.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
-						<% end %>
-					</td>
+						</td>
+					<% else %>
+						<td><%= "♡" %></td>
+			  			<td><p class="comment-list bt style-2">コメント数:<%= @books.post_comments.count %></p></td>
+					<% end %>
 				</tr>
 				</tbody>
 			</table>
+			<div>
+				<p>コメント一覧</p>
+				<% @books.post_comments.each do |post_comment| %>
+					<div><%= attachment_image_tag post_comment.user, :profile_image, size: "40x40", format: 'jpeg', fallback: "no_image.jpg" %></div>
+					<p><%= post_comment.comment %></p>
+					<%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete　%>
+				<% end %>
+			</div>
+			<div>
+				<%= form_for [ @books, @comment] do |f| %>
+					<div class="field row">
+						<label>コメント</label>
+						<%= f.text_area :comment, class: "form-control" %>
+					</div>
+					<div class="action row">
+					<%= f.submit "送信", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+					</div>
+				<% end %>
+			</div>
 		</div>
 	</div>
 </div>
