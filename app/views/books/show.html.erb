@@ -72,20 +72,10 @@
 						<%= link_to "Destroy",  book_path(@books.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
 						</td>
 					<% else %>
-						<td>
-						<% if @books.favorited_by?(current_user) %>
-						    <%= link_to book_favorites_path(@books.id), method: :delete do %>
-						    <i class="fa fa-heart" aria-hidden="true" style="color: #333333;"></i>
-						    <%= @books.favorites.count %>
-						    <% end %>
-						<% else %>
-						    <%= link_to book_favorites_path(@books.id), method: :post do %>
-						    <i class="far fa-heart" aria-hidden="true" ></i>
-						    <%= @books.favorites.count %>
-						    <% end %>
-						<% end %>
-						</td>
-			  			<td><p class="comment-list bt style-2">コメント数:<%= @books.post_comments.count %></p></td>
+					<td>
+						<%= render partial: 'favorites/favorite', locals:{ book: @books } %>
+					</td>
+					<td><p class="comment-list bt style-2">コメント数:<%= @books.post_comments.count %></p></td>
 					<% end %>
 				</tr>
 				</tbody>
